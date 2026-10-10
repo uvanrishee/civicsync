@@ -163,16 +163,41 @@ If the Gemini API is unavailable due to demand spikes, the assistant automatical
 
 ---
 
-## Deployment
+## Deployment to Streamlit Community Cloud
 
-The application is designed for deployment to Streamlit Community Cloud:
+The application is fully prepared and verified for direct deployment to [Streamlit Community Cloud](https://share.streamlit.io):
 
-1. Connect this repository to your Streamlit Cloud account.
-2. Set the main file path to `app.py`.
-3. Under Settings, open the Secrets panel and paste the contents of your `.env` file.
-4. Deploy.
+1. **Deploy New App:**
+   - **Repository:** `uvanrishee/civicsync`
+   - **Branch:** `master`
+   - **Main file path:** `app.py`
+   - **App URL:** (e.g. `civicsync-chennai.streamlit.app`)
 
-No build step is required. All dependencies are declared in `requirements.txt`.
+2. **Configure Secrets in Dashboard (App Settings -> Secrets):**
+   ```toml
+   SUPABASE_URL = "https://your-project.supabase.co"
+   SUPABASE_ANON_KEY = "your-public-anon-key"
+   SUPABASE_SERVICE_ROLE_KEY = "" # Optional on public host
+
+   GEMINI_API_KEY = "AIzaSy..."
+   GEMINI_MODEL = "gemini-flash-latest"
+
+   ADMIN_ACCESS_KEY = "civicsync-admin-secret-2026"
+
+   DEMO_RESIDENT_EMAIL = "resident@civicsync.demo"
+   DEMO_RESIDENT_PASSWORD = "DemoResident#2026"
+
+   DEMO_GCC_EMAIL = "authority.gcc@civicsync.demo"
+   DEMO_GCC_PASSWORD = "DemoAuthority#GCC2026"
+
+   DEMO_CMWSSB_EMAIL = "authority.cmwssb@civicsync.demo"
+   DEMO_CMWSSB_PASSWORD = "DemoAuthority#CMWSSB2026"
+
+   DEMO_ADMIN_EMAIL = "admin@civicsync.demo"
+   DEMO_ADMIN_PASSWORD = "DemoAdmin#Platform2026"
+   ```
+
+3. **Deploy:** Click **Deploy!**. The app will start automatically with no build step required. All dependencies are managed via `requirements.txt`.
 
 ---
 
