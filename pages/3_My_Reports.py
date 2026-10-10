@@ -18,8 +18,7 @@ user = st.session_state.get("auth_user")
 access_token = st.session_state.get("access_token")
 
 if not user:
-    st.warning("⚠️ **Sign In Required**: Please log in as a resident to view your reported issues.")
-    st.info("💡 You can switch to the **Citizen (Ravi)** demo account in the sidebar.")
+    st.warning("⚠️ **Sign In Required**: Please log in as a resident to view your reported issues. Use the **Demo** tab in the sidebar to sign in instantly.")
     st.stop()
 
 reporter_id = user.get("user_id") if isinstance(user, dict) else user.id

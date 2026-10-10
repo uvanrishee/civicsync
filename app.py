@@ -256,8 +256,8 @@ else:
         st.markdown("### Access CivicSync")
         tab_login, tab_citizen_signup, tab_auth_signup, tab_demo = st.tabs([
             "Sign In",
-            "Citizen Register",
-            "Authority Register",
+            "Resident",
+            "Authority",
             "Demo"
         ])
 

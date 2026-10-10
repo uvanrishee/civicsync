@@ -24,8 +24,7 @@ access_token = st.session_state.get("access_token")
 # Enforce Role Check
 user_role = profile.get("role") if profile else None
 if user_role not in ["AUTHORITY", "ADMIN"]:
-    st.error("⛔ **Access Restricted**: You must belong to an approved civic organization to access the Authority Portal.")
-    st.info("💡 You can switch to **GCC Roads Dept** or **Metro Water (CMWSSB)** demo persona in the sidebar to test authority operations.")
+    st.error("⛔ **Access Restricted**: You must belong to an approved civic organization to access the Authority Portal. Switch to the **GCC Roads Dept** or **Metro Water** demo in the sidebar to test authority operations.")
     st.stop()
 
 # Identify Organization Context

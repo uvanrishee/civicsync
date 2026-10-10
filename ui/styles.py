@@ -288,5 +288,18 @@ h1, h2, h3, h4, h5, h6 {
     color: #64748B !important;
     font-size: 0.78rem !important;
 }
+
+/* ============================================================
+   SIDEBAR FOOTER
+   ============================================================ */
+.sidebar-footer {
+    margin-top: 1.5rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid #E2E8F0;
+    color: #94A3B8 !important;
+    font-size: 0.75rem;
+    text-align: center;
+    letter-spacing: 0.2px;
+}
 </style>
 """

@@ -23,7 +23,7 @@ def render_sidebar():
     with st.sidebar:
         st.markdown("""
         <div class="sidebar-brand">
-            <h2>CivicSync</h2>
+            <h2>🏙️ CivicSync</h2>
             <small>Chennai Public Works &amp; Disruption Platform</small>
         </div>
         """, unsafe_allow_html=True)
@@ -36,7 +36,7 @@ def render_sidebar():
             role = profile.get("role", "RESIDENT")
             name = profile.get("display_name", "User")
 
-            st.markdown(f"**Signed in as:** `{name}`")
+            st.markdown(f"**{name}**")
             if role == "RESIDENT":
                 st.caption("Role: Resident Citizen")
             elif role == "AUTHORITY":
@@ -79,7 +79,11 @@ def render_sidebar():
         - **Admin Portal** — Organization approvals
         """)
 
-        st.caption("CivicSync · Version 1.0")
+        st.markdown("""
+        <div class="sidebar-footer">
+            CivicSync &middot; Version 1.0
+        </div>
+        """, unsafe_allow_html=True)
 
 def _switch_demo(persona_key: str):
     """Handles one-click demo login from sidebar."""
