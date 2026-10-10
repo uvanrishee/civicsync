@@ -7,7 +7,16 @@ env_path = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
 
 def get_env_var(key: str, default: str = "") -> str:
-    """Retrieve environment variable, falling back to default or empty string."""
+    """
+    Retrieve configuration value.
+    Checks Streamlit Cloud secrets (st.secrets) first, then os.environ, falling back to default.
+    """
+    try:
+        import streamlit as st
+        if hasattr(st, "secrets") and key in st.secrets:
+            return str(st.secrets[key]).strip()
+    except Exception:
+        pass
     return os.environ.get(key, default).strip()
 
 # Supabase Credentials

@@ -2,6 +2,8 @@
 .env
 .env.local
 .env.*.local
+.streamlit/secrets.toml
+secrets.toml
 
 # AI Agent / Planning docs (internal only, not needed to run app)
 detail.md
