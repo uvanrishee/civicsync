@@ -3,6 +3,21 @@
 .env.local
 .env.*.local
 
+# AI Agent / Planning docs (internal only, not needed to run app)
+detail.md
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+current_state.md
+implementation_plan.md
+directives/
+
+# One-off scripts (seeding, migrations, tests)
+execution/seed_data.py
+execution/migrate_*.py
+execution/test_*.py
+execution/check_reports.py
+
 # Intermediates / Temp processing files
 .tmp/
 *.tmp
