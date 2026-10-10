@@ -3,6 +3,7 @@
 **A civic coordination and public works intelligence platform for Chennai, Tamil Nadu.**
 
 Live Demo: **[https://civicsync.streamlit.app](https://civicsync.streamlit.app)**
+Demo Video: **https://drive.google.com/file/d/1eMF0ysMMwUAb17URc_j_NZ7PrkzbPEtJ/view**
 
 CivicSync bridges the gap between government authorities and residents by providing a transparent, real-time view of public infrastructure works across the city. Residents can discover nearby disruptions, report issues with geo-tagged evidence, and receive AI-assisted guidance — while authorities manage projects, triage incoming reports, and maintain accountability through a structured workflow.
 
