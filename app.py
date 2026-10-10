@@ -144,7 +144,7 @@ if user and profile:
                 st.session_state["selected_project_id"] = None
                 st.rerun()
 
-    st.markdown("#### Platform Workspaces & Services")
+    st.markdown("### Platform Workspaces & Services")
 
     # Balanced 4-Column Action Grid Tailored by Role
     col1, col2, col3, col4 = st.columns(4)

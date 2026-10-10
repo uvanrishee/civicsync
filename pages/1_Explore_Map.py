@@ -133,12 +133,34 @@ all_reports = get_all_reports_for_map() if toggle_reports else []
 # Map Legend
 # ------------------------------------------------------------------
 st.markdown("""
-<div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin: 4px 0 12px 0; font-size: 12px; color: #475569;">
-    <span>🔵 Public Works</span>
-    <span style="color:#D97706">🔴 Pending / New Issue</span>
-    <span style="color:#D97706">🟠 Acknowledged</span>
-    <span style="color:#1D4ED8">🔵 In Progress</span>
-    <span style="color:#15803D">🟢 Resolved</span>
+<div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 10px 14px; margin: 4px 0 12px 0; display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <span style="font-weight: 600; color: #1E293B;">Layer Types:</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: #0F766E;">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #0F766E; display: inline-block;"></span> <strong>Public Works</strong> (Active Projects)
+        </span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: #475569;">
+            <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span> <strong>Citizen Reports</strong> (Civic Issues)
+        </span>
+        <span style="display: inline-flex; align-items: center; gap: 6px; color: #DC2626;">
+            <span style="width: 12px; height: 12px; border-radius: 50%; background: rgba(220, 38, 38, 0.25); border: 1px solid #DC2626; display: inline-block;"></span> 5 km Warning Overlay
+        </span>
+    </div>
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; align-items: center; border-top: 1px dashed #E2E8F0; padding-top: 6px;">
+        <span style="font-weight: 600; color: #1E293B;">Citizen Report Status:</span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; color: #B91C1C;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #EF4444; display: inline-block;"></span> Pending
+        </span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; color: #C2410C;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #F97316; display: inline-block;"></span> Acknowledged
+        </span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; color: #1D4ED8;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #3B82F6; display: inline-block;"></span> In Progress
+        </span>
+        <span style="display: inline-flex; align-items: center; gap: 4px; color: #15803D;">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #22C55E; display: inline-block;"></span> Resolved
+        </span>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -325,12 +347,17 @@ st.markdown("#### All Matching Projects")
 if projects:
     table_data = []
     for p in projects:
+        raw_status = p.get("status") or "UNKNOWN"
+        formatted_status = raw_status.replace("_", " ").title()
+        raw_category = p.get("category") or "OTHER"
+        formatted_category = raw_category.replace("_", " ").title()
+
         table_data.append({
             "Title": p.get("title"),
-            "Sector": p.get("category"),
+            "Sector": formatted_category,
             "Location": p.get("location_name"),
-            "Status": p.get("status"),
+            "Status": formatted_status,
             "Target Completion": p.get("current_estimated_end_date"),
             "Authority": p.get("organizations", {}).get("name") if isinstance(p.get("organizations"), dict) else "Public Authority"
         })
-    st.dataframe(table_data, use_container_width=True)
+    st.dataframe(table_data, use_container_width=True, hide_index=True)

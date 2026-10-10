@@ -53,7 +53,7 @@ tab_reg, tab_my_proj, tab_triage = st.tabs([
 # TAB 1: REGISTER PUBLIC WORK
 # -------------------------------------------------------------
 with tab_reg:
-    st.markdown("### ➕ Register New Public Work")
+    st.markdown("#### Register New Public Work")
     st.caption("Publish work timelines and disruption advisories to the public Chennai map.")
 
     with st.form("register_work_form"):
@@ -135,7 +135,7 @@ with tab_reg:
 # TAB 2: UPDATE PROJECT PROGRESS
 # -------------------------------------------------------------
 with tab_my_proj:
-    st.markdown("### 📊 Manage Ongoing Projects & Log Timeline Updates")
+    st.markdown("#### Manage Ongoing Projects & Log Timeline Updates")
     org_projects = get_organization_projects(org_id, access_token=access_token)
 
     if not org_projects:
@@ -186,7 +186,7 @@ with tab_my_proj:
 # TAB 3: CITIZEN REPORTS TRIAGE INBOX
 # -------------------------------------------------------------
 with tab_triage:
-    st.markdown("### 📥 Citizen Reports Triage Inbox")
+    st.markdown("#### Citizen Reports Triage Inbox")
     st.caption("Reports assigned to your organization by citizens. Review, acknowledge, and resolve.")
 
     assigned_reports = get_assigned_organization_reports(org_id, access_token=access_token)
@@ -196,21 +196,33 @@ with tab_triage:
     else:
         st.markdown(f"Found **{len(assigned_reports)}** assigned reports.")
 
+        status_icons = {
+            "PENDING_REVIEW": "⏳ Pending",
+            "ACKNOWLEDGED": "🟠 Acknowledged",
+            "IN_PROGRESS": "🔵 In Progress",
+            "RESOLVED": "🟢 Resolved",
+            "REDIRECTED": "↩️ Redirected",
+            "REJECTED": "❌ Rejected"
+        }
+
         for rep in assigned_reports:
             r_id = rep.get("id")
-            r_title = rep.get("title") or rep.get("category")
+            r_title = rep.get("title") or rep.get("category", "Civic Issue")
             r_cat = rep.get("category")
             r_loc = rep.get("location_desc")
             r_status = rep.get("status")
             r_desc = rep.get("description")
             r_photo = rep.get("photo_storage_path")
 
-            with st.expander(f"[{r_status}] {r_title} — {r_loc}", expanded=(r_status == "PENDING_REVIEW")):
+            status_label = status_icons.get(r_status, r_status)
+            clean_cat = r_cat.replace("_", " ").title() if r_cat else "Civic Issue"
+
+            with st.expander(f"{status_label} · {clean_cat} — {r_loc}", expanded=False):
                 st.markdown(f"""
-                <div style="background: #F8FAFC; padding: 10px; border-radius: 6px; border: 1px solid #E2E8F0; margin-bottom: 8px;">
-                    <div><strong>Category:</strong> <code>{r_cat}</code> | <strong>Ref ID:</strong> <code>{r_id[:8]}...</code></div>
-                    <div><strong>Location:</strong> {r_loc}</div>
-                    <div style="margin-top: 6px;"><strong>Citizen Description:</strong> {r_desc}</div>
+                <div style="background: #F8FAFC; padding: 10px 14px; border-radius: 6px; border: 1px solid #E2E8F0; margin-bottom: 10px; font-size: 0.9rem;">
+                    <div><strong>Category:</strong> {clean_cat} &nbsp;|&nbsp; <strong>Ref ID:</strong> <code>{r_id[:8]}...</code></div>
+                    <div style="margin-top: 4px;"><strong>Location:</strong> {r_loc}</div>
+                    <div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed #E2E8F0;"><strong>Citizen Description:</strong> {r_desc}</div>
                 </div>
                 """, unsafe_allow_html=True)
 

@@ -180,6 +180,8 @@ if st.button("Submit Question", use_container_width=True, type="primary") or pre
                     access_token=access_token
                 )
 
-            st.markdown("#### 🤖 Grounded Civic Advisory")
-            st.markdown(answer)
-            st.caption("Answers are strictly constrained by verified database records and proximity calculations. The assistant does not invent official closures or safety assurances.")
+            with st.container(border=True):
+                st.markdown("#### 🤖 Grounded Civic Advisory")
+                st.markdown(answer)
+                st.divider()
+                st.caption("🛡️ **Fact-Grounded Response:** Answers are strictly constrained by verified database records and proximity calculations. The assistant does not invent official closures or safety assurances.")

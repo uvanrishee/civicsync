@@ -43,19 +43,19 @@ else:
         photo_path = rep.get("photo_storage_path")
         resolution = rep.get("resolution_summary")
 
-        with st.container():
+        with st.container(border=True):
+            col_hdr_left, col_hdr_right = st.columns([3, 1])
+            with col_hdr_left:
+                st.caption(f"Ref ID: `{rep_id[:8]}...` · Filed on: {created_at}")
+                st.markdown(f"#### {title}")
+            with col_hdr_right:
+                st.markdown(f"<div style='text-align: right; padding-top: 4px;'>{get_status_badge_html(status)}</div>", unsafe_allow_html=True)
+
+            st.markdown(f"📍 **Location:** {loc} &nbsp;·&nbsp; 🏛️ **Assigned Authority:** {org_name}")
+
             st.markdown(f"""
-            <div class="civic-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.8rem; color: #64748B;">Ref ID: <code>{rep_id[:8]}...</code> | Filed on: {created_at}</span>
-                    <div>{get_status_badge_html(status)}</div>
-                </div>
-                <h4 style="margin: 4px 0 6px 0; color: #172B4D;">{title}</h4>
-                <p style="margin: 0 0 6px 0; font-size: 0.9rem; color: #334155;">📍 <strong>Location:</strong> {loc}</p>
-                <p style="margin: 0 0 6px 0; font-size: 0.9rem; color: #475569;">🏛️ <strong>Assigned Authority:</strong> {org_name}</p>
-                <p style="margin: 6px 0; font-size: 0.88rem; color: #1E293B; background: #F8FAFC; padding: 8px; border-radius: 6px; border: 1px solid #E2E8F0;">
-                    {rep.get('description')}
-                </p>
+            <div style="background: #F8FAFC; padding: 10px 14px; border-radius: 6px; border: 1px solid #E2E8F0; margin: 8px 0 12px 0; font-size: 0.9rem; color: #1E293B;">
+                {rep.get('description')}
             </div>
             """, unsafe_allow_html=True)
 
@@ -86,5 +86,3 @@ else:
                         st.markdown(f"- **{h_time}** → `{h_new}`: {h_note}")
                 else:
                     st.caption("Awaiting initial authority triage.")
-
-            st.divider()
